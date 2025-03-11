@@ -5,7 +5,7 @@
 
 #define BUFFER_SIZE 1024
 
-
+//tehdään node
 typedef struct Node {
     char *line;
     struct Node *next;
