@@ -2,17 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+// etsitään hakusanaa annetusta tiedostosta
 void search_in_file(const char *search_term, FILE *file) {
     char *line = NULL;
     size_t len = 0;
     
     while (getline(&line, &len, file) != -1) {
-        if (strstr(line, search_term) != NULL) { // Case-sensitive match
+        if (strstr(line, search_term) != NULL) { // etsitään osumaa riviltä
             printf("%s", line);
         }
     }
     
-    free(line); // Free the memory allocated by getline
+    free(line); // vapauta muisti
 }
 
 int main(int argc, char *argv[]) {
@@ -24,10 +25,10 @@ int main(int argc, char *argv[]) {
     const char *search_term = argv[1];
     
     if (argc == 2) {
-        // No file arguments, read from standard input
+        // luetaan syötteestä
         search_in_file(search_term, stdin);
     } else {
-        // Loop through each file argument
+        // käsitellään jokainen annettu tiedosto
         for (int i = 2; i < argc; i++) {
             FILE *file = fopen(argv[i], "r");
             if (file == NULL) {

@@ -27,20 +27,24 @@ int main(int argc, char *argv[]) {
                 currentChar = buffer[j];
                 
                 if (firstChar) {
+					// ensimmäinen merkki tallennetaan
                     prevChar = currentChar;
                     count = 1;
                     firstChar = 0;
                 } else if (currentChar == prevChar) {
+					//sama merkki jatkuu
                     count++;
                 } else {
+					//tallennetaan tulos
                     fwrite(&count, sizeof(int), 1, stdout);
                     fwrite(&prevChar, sizeof(char), 1, stdout);
+					//aloitetaan uuden merkin laskenta
                     prevChar = currentChar;
                     count = 1;
                 }
             }
         }
-
+		// tallennetaan viimeinen merkki
         if (count > 0) {
             fwrite(&count, sizeof(int), 1, stdout);
             fwrite(&prevChar, sizeof(char), 1, stdout);
